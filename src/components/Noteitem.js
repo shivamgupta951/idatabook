@@ -12,8 +12,8 @@ const Noteitem = (props) => {
         <div className="card-body">
           <h5 className="card-title">{note.title}</h5>
           <p className="card-text">{note.description}</p>
-          <RiDeleteBin6Line onClick={()=>{deleteNote(note._id)}} className="point mx-2"/>
-          <FaRegEdit className="point mx-2" onClick={()=>{updateNote(note)}}/>
+          <RiDeleteBin6Line onClick={()=>{deleteNote(note._id);props.showAlert("Deleted Succesfully","success");}} className="point mx-2"/>
+          <FaRegEdit className="point mx-2" onClick={()=>{updateNote(note);}}/>
         </div>
       </div>
     </div>
