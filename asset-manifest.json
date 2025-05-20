@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/idatabook/static/css/main.4ebea6c0.css",
+    "main.js": "/idatabook/static/js/main.1119a19f.js",
+    "index.html": "/idatabook/index.html",
+    "main.4ebea6c0.css.map": "/idatabook/static/css/main.4ebea6c0.css.map",
+    "main.1119a19f.js.map": "/idatabook/static/js/main.1119a19f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4ebea6c0.css",
+    "static/js/main.1119a19f.js"
+  ]
+}
