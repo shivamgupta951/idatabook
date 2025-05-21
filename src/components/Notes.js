@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
-import { useState } from "react";
-import { useRef } from "react";
-import { useEffect } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import noteContext from "../context/notes/noteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 import { useNavigate } from "react-router-dom";
+
+
 const Notes = (props) => {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const context = useContext(noteContext);
   const [note, setNote] = useState({
     id: "",
@@ -15,33 +14,46 @@ const Notes = (props) => {
     edescription: "",
     etag: "",
   });
-  const { notes, getNotes , editNote} = context;
+  const { notes, getNotes, editNote } = context;
+  
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login", { replace: true });
-  } else {
-    getNotes();
-  }
-  // eslint-disable-next-line
-}, []);
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login", { replace: true });
+    } else {
+      getNotes();
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const updateNote = (currentNote) => {
     ref.current.click();
-    setNote({id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag});
+    setNote({
+      id: currentNote._id, 
+      etitle: currentNote.title, 
+      edescription: currentNote.description, 
+      etag: currentNote.tag
+    });
   };
+
   const ref = useRef(null);
   const refClose = useRef(null);
+
   const handleclick = () => {
     refClose.current.click();
-    editNote(note.id,note.etitle,note.edescription,note.etag)
-    props.showAlert("Updated Succesfully","success");
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+    props.showAlert("Updated Successfully", "success");
   };
+
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <Addnote showAlert={props.showAlert}/>
+      
+      {/* Hidden button for modal */}
       <button
         type="button"
         className="btn btn-primary d-none"
@@ -51,6 +63,8 @@ const Notes = (props) => {
       >
         Launch demo modal
       </button>
+      
+      {/* Edit Note Modal */}
       <div
         className="modal fade"
         id="exampleModal"
@@ -58,7 +72,7 @@ const Notes = (props) => {
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
@@ -73,7 +87,7 @@ const Notes = (props) => {
             </div>
             <div className="modal-body">
               <form className="my-3">
-                <div className="my-3">
+                <div className="mb-3">
                   <label htmlFor="etitle" className="form-label">
                     Title
                   </label>
@@ -82,7 +96,6 @@ const Notes = (props) => {
                     className="form-control"
                     id="etitle"
                     name="etitle"
-                    aria-describedby="emailHelp"
                     onChange={onChange}
                     minLength={5}
                     required
@@ -121,7 +134,7 @@ const Notes = (props) => {
                 </div>
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex flex-wrap justify-content-center justify-content-md-end gap-2">
               <button
                 ref={refClose}
                 type="button"
@@ -130,23 +143,39 @@ const Notes = (props) => {
               >
                 Close
               </button>
-              <button disabled={note.etitle.length<2 || note.edescription.length<2} type="button" className="btn btn-primary" onClick={handleclick}>
+              <button 
+                disabled={note.etitle.length < 2 || note.edescription.length < 2} 
+                type="button" 
+                className="btn btn-primary"
+                onClick={handleclick}
+              >
                 Update Note
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="row my-3">
-        <h2>Your Notes</h2>
-        <div className="container mx-2">
-          {notes.length===0 && 'No notes to display'}
+      
+      {/* Notes List - Fixed responsive grid */}
+      <div className="container my-3">
+        <h2 className="mb-3">Your Notes</h2>
+        <div className="text-center my-4">
+          {notes.length === 0 && 'No notes to display'}
         </div>
-        {notes.map((note) => {
-          return (
-            <Noteitem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert}/>
-          );
-        })}
+        <div className="row">
+          {notes.map((note) => (
+            <div 
+              className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4" 
+              key={note._id}
+            >
+              <Noteitem 
+                updateNote={updateNote} 
+                note={note} 
+                showAlert={props.showAlert}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

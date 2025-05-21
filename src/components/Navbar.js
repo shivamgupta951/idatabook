@@ -6,14 +6,16 @@ import { BiHome } from "react-icons/bi";
 import { FaCircleInfo } from "react-icons/fa6";
 import { MdPeopleAlt } from "react-icons/md";
 import { IoLogIn } from "react-icons/io5";
+
 const Navbar = (props) => {
   const emptytoken = () => {
     localStorage.removeItem("token");
-    window.location.reload(); // This reloads the current page
+    window.location.reload();
   };
   const HomeTriggered = () => {
     props.showAlert("Login to An Account to Unlock Home Page!", "danger");
   };
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -43,13 +45,12 @@ const Navbar = (props) => {
                     `nav-link${isActive ? " active" : ""}`
                   }
                 >
-                  <div>
-                    {" "}
+                  <div className="d-flex align-items-center">
                     <BiHome
                       style={{
                         fontSize: "20px",
                         marginBottom: "3px",
-                        marginRight: "1px",
+                        marginRight: "5px",
                       }}
                     />
                     Home
@@ -66,19 +67,20 @@ const Navbar = (props) => {
                   }
                   onClick={HomeTriggered}
                 >
-                  <div>
-                    {" "}
+                  <div className="d-flex align-items-center position-relative pe-3">
                     <BiHome
                       style={{
                         fontSize: "20px",
                         marginBottom: "3px",
-                        marginRight: "1px",
+                        marginRight: "5px",
                       }}
                     />
                     Home
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <FaLock style={{ fontSize: "8px" }} />
+                    <FaLock className="position-absolute end-0" style={{ 
+                      fontSize: "8px",
+                      top: "50%",
+                      transform: "translateY(-50%)"
+                    }} />
                   </div>
                 </NavLink>
               </li>
@@ -90,19 +92,32 @@ const Navbar = (props) => {
                   `nav-link${isActive ? " active" : ""}`
                 }
               >
-                <FaCircleInfo
-                  style={{
-                    fontSize: "20px",
-                    marginBottom: "3px",
-                    marginRight: "3px",
-                  }}
-                />
-                About
+                <div className="d-flex align-items-center">
+                  <FaCircleInfo
+                    style={{
+                      fontSize: "20px",
+                      marginBottom: "3px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  About
+                </div>
               </NavLink>
             </li>
           </ul>
-          <form className="d-flex" role="search">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <form className="d-flex flex-lg-row flex-column align-items-lg-center gap-2">
+            <div className="d-flex">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </div>
+            <ul className="navbar-nav flex-row gap-lg-2">
               {!localStorage.getItem("token") ? (
                 <>
                   <li className="nav-item">
@@ -114,14 +129,16 @@ const Navbar = (props) => {
                       }
                       style={{ width: "80px" }}
                     >
-                      <IoLogIn
-                        style={{
-                          fontSize: "20px",
-                          marginBottom: "3px",
-                          marginRight: "3px",
-                        }}
-                      />
-                      Login
+                      <div className="d-flex align-items-center">
+                        <IoLogIn
+                          style={{
+                            fontSize: "20px",
+                            marginBottom: "3px",
+                            marginRight: "5px",
+                          }}
+                        />
+                        Login
+                      </div>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -132,14 +149,16 @@ const Navbar = (props) => {
                       }
                       style={{ width: "100px" }}
                     >
-                      <MdPeopleAlt
-                        style={{
-                          fontSize: "20px",
-                          marginBottom: "3px",
-                          marginRight: "3px",
-                        }}
-                      />
-                      SignUp
+                      <div className="d-flex align-items-center">
+                        <MdPeopleAlt
+                          style={{
+                            fontSize: "20px",
+                            marginBottom: "3px",
+                            marginRight: "5px",
+                          }}
+                        />
+                        SignUp
+                      </div>
                     </NavLink>
                   </li>
                 </>
@@ -149,29 +168,22 @@ const Navbar = (props) => {
                     to="/login"
                     className="nav-link active"
                     onClick={emptytoken}
-                    style={{width: "100px"}}
+                    style={{ width: "100px" }}
                   >
-                    <IoLogIn
-                      style={{
-                        fontSize: "20px",
-                        marginBottom: "3px",
-                        marginRight: "3px",
-                      }}
-                    />
-                    Logout
+                    <div className="d-flex align-items-center">
+                      <IoLogIn
+                        style={{
+                          fontSize: "20px",
+                          marginBottom: "3px",
+                          marginRight: "5px",
+                        }}
+                      />
+                      Logout
+                    </div>
                   </NavLink>
                 </li>
               )}
             </ul>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
           </form>
         </div>
       </div>
