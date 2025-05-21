@@ -72,7 +72,7 @@ const Login = (props) => {
       : "10px 10px 40px 10px black",
     transform: isHovered ? "scale(1.02)" : "scale(1)",
     padding: "20px",
-    margin: "20px"
+    margin: "20px",
   };
 
   return (
