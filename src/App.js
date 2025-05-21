@@ -21,16 +21,16 @@ function App() {
     });
     setTimeout(() => {
       setAlert(null);
-    }, 1500);
+    }, 2500);
   };
 
   return (
     <>
       <NoteState>
         <Router>
-          <Navbar />
+          <Navbar showAlert={showAlert}/>
           <Alert alert={alert} />
-          <div className="container">
+          <div>
             <Routes>
               <Route
                 path="/"
