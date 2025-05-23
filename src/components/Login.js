@@ -52,7 +52,7 @@ const Login = (props) => {
     padding: "5% 0",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   };
 
   const noiseBackground = {
@@ -91,7 +91,7 @@ const Login = (props) => {
         </h2>
         {!localStorage.getItem("token") && console.log("auth-token is empty!")}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3" style={{ width: "100%", marginTop: "8%" }}>
+          <div className="mb-3" style={{ width: "100%", marginTop: "8%",marginLeft: "14%"}}>
             <label
               htmlFor="email"
               className="form-label"
@@ -107,9 +107,10 @@ const Login = (props) => {
               value={credentials.email}
               onChange={onChange}
               required
+              style={{ width: "70%"}}
             />
           </div>
-          <div className="mb-3" style={{ width: "100%", marginTop: "5%" }}>
+          <div className="mb-3" style={{ width: "100%", marginTop: "5%",marginLeft: "14%"}}>
             <label
               htmlFor="password"
               className="form-label"
@@ -125,9 +126,13 @@ const Login = (props) => {
               value={credentials.password}
               onChange={onChange}
               required
+              style={{ width: "70%" }}
             />
           </div>
-          <div className="d-flex justify-content-center" style={{ marginTop: "10%" }}>
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginTop: "10%" }}
+          >
             <button
               type="submit"
               className="btn btn-primary"

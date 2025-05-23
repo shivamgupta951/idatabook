@@ -75,7 +75,7 @@ const Signup = (props) => {
     transform: isHovered ? "scale(1.02)" : "scale(1)",
     padding: "20px",
     margin: "20px",
-    color: "white"
+    color: "white",
   };
 
   return (
@@ -90,14 +90,18 @@ const Signup = (props) => {
           className="text-center"
           style={{ marginTop: "5%", color: "#f5f1f1" }}
         >
-          SignUp 
+          SignUp
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "5%", marginLeft: "14%" }}
+          >
             <label htmlFor="name" className="form-label">
               Name
             </label>
             <input
+              style={{ width: "70%" }}
               type="text"
               className="form-control"
               onChange={onChange}
@@ -106,11 +110,15 @@ const Signup = (props) => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "5%", marginLeft: "14%" }}
+          >
             <label htmlFor="email" className="form-label">
               Email address
             </label>
             <input
+              style={{ width: "70%" }}
               type="email"
               className="form-control"
               onChange={onChange}
@@ -119,11 +127,15 @@ const Signup = (props) => {
               aria-describedby="emailHelp"
             />
           </div>
-          <div className="mb-3">
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "5%", marginLeft: "14%" }}
+          >
             <label htmlFor="password" className="form-label">
               Password
             </label>
             <input
+              style={{ width: "70%" }}
               type="password"
               className="form-control"
               onChange={onChange}
@@ -133,11 +145,15 @@ const Signup = (props) => {
               minLength={6}
             />
           </div>
-          <div className="mb-3">
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "5%", marginLeft: "14%" }}
+          >
             <label htmlFor="cpassword" className="form-label">
               Confirm Password
             </label>
             <input
+              style={{ width: "70%" }}
               type="password"
               className="form-control"
               onChange={onChange}
@@ -147,9 +163,18 @@ const Signup = (props) => {
               minLength={6}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          <div
+            className="d-flex justify-content-center"
+            style={{ marginTop: "7%" }}
+          >
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ width: "100%", maxWidth: "200px" }}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
