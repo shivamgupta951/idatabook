@@ -3,7 +3,7 @@ import noteContext from "../context/notes/noteContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 import { useNavigate } from "react-router-dom";
-
+import Backgroundimage from "../images/Background_image.png";
 
 const Notes = (props) => {
   const navigate = useNavigate();
@@ -14,8 +14,9 @@ const Notes = (props) => {
     edescription: "",
     etag: "",
   });
+
   const { notes, getNotes, editNote } = context;
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -26,20 +27,32 @@ const Notes = (props) => {
     // eslint-disable-next-line
   }, []);
 
+  const ref = useRef(null);
+  const refClose = useRef(null);
+  const backgroundStyle = {
+    backgroundImage: `url(${Backgroundimage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    minHeight: "92vh",
+    width: "100%",
+    padding: "5% 0",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontStyle: "oblique",
+  };
   const updateNote = (currentNote) => {
     ref.current.click();
     setNote({
-      id: currentNote._id, 
-      etitle: currentNote.title, 
-      edescription: currentNote.description, 
-      etag: currentNote.tag
+      id: currentNote._id,
+      etitle: currentNote.title,
+      edescription: currentNote.description,
+      etag: currentNote.tag,
     });
   };
 
-  const ref = useRef(null);
-  const refClose = useRef(null);
-
-  const handleclick = () => {
+  const handleClick = () => {
     refClose.current.click();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     props.showAlert("Updated Successfully", "success");
@@ -51,31 +64,30 @@ const Notes = (props) => {
 
   return (
     <>
-      <Addnote showAlert={props.showAlert}/>
-      
-      {/* Hidden button for modal */}
+      {/* 🔧 Hidden trigger for Edit Note modal */}
       <button
         type="button"
         className="btn btn-primary d-none"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        data-bs-target="#editNoteModal" // ✅ updated ID
         ref={ref}
       >
-        Launch demo modal
+        Launch Edit Modal
       </button>
-      
-      {/* Edit Note Modal */}
+
+      {/* ✅ Edit Note Modal - ID updated from "exampleModal" to "editNoteModal" */}
+      {/* ✅ Edit Note Modal */}
       <div
         className="modal fade"
-        id="exampleModal"
+        id="editNoteModal"
         tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="editNoteModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1 className="modal-title fs-5" id="editNoteModalLabel">
                 Edit Note
               </h1>
               <button
@@ -98,9 +110,14 @@ const Notes = (props) => {
                     name="etitle"
                     onChange={onChange}
                     minLength={5}
+                    maxLength={10} // ✅ Limit to 10 characters
                     required
                     value={note.etitle}
                   />
+                  <small className="form-text text-muted">
+                    Max 10 characters allowed.
+                  </small>{" "}
+                  {/* ✅ Tip for user */}
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">
@@ -128,9 +145,14 @@ const Notes = (props) => {
                     name="etag"
                     onChange={onChange}
                     minLength={5}
+                    maxLength={10} // ✅ Limit to 10 characters
                     required
                     value={note.etag}
                   />
+                  <small className="form-text text-muted">
+                    Max 10 characters allowed.
+                  </small>{" "}
+                  {/* ✅ Tip for user */}
                 </div>
               </form>
             </div>
@@ -143,11 +165,13 @@ const Notes = (props) => {
               >
                 Close
               </button>
-              <button 
-                disabled={note.etitle.length < 2 || note.edescription.length < 2} 
-                type="button" 
+              <button
+                disabled={
+                  note.etitle.length < 2 || note.edescription.length < 2
+                }
+                type="button"
                 className="btn btn-primary"
-                onClick={handleclick}
+                onClick={handleClick}
               >
                 Update Note
               </button>
@@ -155,26 +179,64 @@ const Notes = (props) => {
           </div>
         </div>
       </div>
-      
-      {/* Notes List - Fixed responsive grid */}
-      <div className="container my-3">
-        <h2 className="mb-3">Your Notes</h2>
-        <div className="text-center my-4">
-          {notes.length === 0 && 'No notes to display'}
-        </div>
-        <div className="row">
-          {notes.map((note) => (
-            <div 
-              className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-4" 
-              key={note._id}
+
+      {/* Home page code-> */}
+      <div
+        className="d-flex justify-content-around align-items-center"
+        style={backgroundStyle}
+      >
+        <div
+          className="border"
+          style={{
+            height: "70vh",
+            width: "56%",
+            backgroundColor: "#130C30",
+            borderRadius: "2%",
+            marginLeft: "5%",
+          }}
+        >
+          <div className="border" style={{ height: "25%" }}>
+            <Addnote showAlert={props.showAlert} />
+          </div>
+          <div
+            className="border d-flex justify-content-around align-items-center"
+            style={{ height: "65%", width: "100%" }}
+          >
+            <div className="" style={{ height: "8%", width: "4%" }}></div>
+            <div
+              className="border d-flex flex-wrap"
+              style={{ height: "100%", width: "100%" }}
             >
-              <Noteitem 
-                updateNote={updateNote} 
-                note={note} 
-                showAlert={props.showAlert}
-              />
+              {notes.length === 0 ? (
+                <div
+                  className="notesempty text-center"
+                  style={{
+                    color: "wheat",
+                    fontSize: "25px",
+                    marginTop: "135px",
+                    marginLeft: "210px",
+                  }}
+                >
+                  No notes to display
+                </div>
+              ) : (
+                ""
+              )}
+              {notes.map((note) => (
+                <Noteitem
+                  key={note._id}
+                  updateNote={updateNote}
+                  note={note}
+                  showAlert={props.showAlert}
+                />
+              ))}
             </div>
-          ))}
+            <div className="" style={{ height: "8%", width: "4%" }}></div>
+          </div>
+        </div>
+        <div className="border" style={{ height: "350px", width: "250px" }}>
+          {" "}
+          Hello
         </div>
       </div>
     </>

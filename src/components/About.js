@@ -74,7 +74,7 @@ const About = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div style={{ marginTop: "12%" }}>
+            <div style={{ marginTop: "5%" }}>
               <h3 className="d-flex justify-content-start align-items-center">
                 <IoIosGitNetwork
                   style={{ fontSize: "45px", marginRight: "2%" }}
@@ -113,13 +113,13 @@ const About = () => {
           >
             <div
               className=" d-flex justify-content-center align-items-center"
-              style={{ marginTop: "20%" }}
+              style={{ marginTop: "9%" }}
             >
-              <h3>Future Technologies</h3>
+              <h4>Future Technologies</h4>
             </div>
             <div
               className="d-flex justify-content-center align-items-center"
-              style={{ fontSize: "18px" }}
+              style={{ fontSize: "15px" }}
             >
               <ul>
                 <li style={{ marginTop: "3%" }}>Dark Mode</li>
