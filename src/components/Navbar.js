@@ -6,6 +6,7 @@ import { BiHome } from "react-icons/bi";
 import { FaCircleInfo } from "react-icons/fa6";
 import { MdPeopleAlt } from "react-icons/md";
 import { IoLogIn } from "react-icons/io5";
+import { FaBookmark } from "react-icons/fa";
 
 const Navbar = (props) => {
   const emptytoken = () => {
@@ -15,7 +16,7 @@ const Navbar = (props) => {
   const HomeTriggered = () => {
     props.showAlert("Login to An Account to Unlock Home Page!", "danger");
   };
-  
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -76,11 +77,14 @@ const Navbar = (props) => {
                       }}
                     />
                     Home
-                    <FaLock className="position-absolute end-0" style={{ 
-                      fontSize: "8px",
-                      top: "50%",
-                      transform: "translateY(-50%)"
-                    }} />
+                    <FaLock
+                      className="position-absolute end-0"
+                      style={{
+                        fontSize: "8px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                      }}
+                    />
                   </div>
                 </NavLink>
               </li>
@@ -103,6 +107,23 @@ const Navbar = (props) => {
                   About
                 </div>
               </NavLink>
+            </li>
+            <li className="nav-item py-1" style={{ marginLeft: "300px" }}>
+              <div
+                className=""
+                style={{ fontSize: "11px", color: "white", height: "100%",fontFamily: "cursive"}}
+              >
+                <strong>
+                  <div>A place for your short notes</div>
+                  <div>
+                    and memories!
+                    <FaBookmark
+                      size={11}
+                      style={{ marginBottom: "4px", marginLeft: "2px" }}
+                    />
+                  </div>
+                </strong>
+              </div>
             </li>
           </ul>
           <form className="d-flex flex-lg-row flex-column align-items-lg-center gap-2">
