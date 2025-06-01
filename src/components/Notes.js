@@ -4,9 +4,27 @@ import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 import { useNavigate } from "react-router-dom";
 import Backgroundimage from "../images/Background_image.png";
+import cardbackground from "../images/cardbackground.png";
 import { CgNotes } from "react-icons/cg";
-
+import { IoIosMail } from "react-icons/io";
+/* 
+   Outline at every box 
+   hover effects 
+   online database or use versal 
+*/
 const Notes = (props) => {
+  const blurDivStyle = {
+    height: "90%",
+    width: "80%",
+    borderRadius: "25%",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backdropFilter: "blur(5px)",
+    WebkitBackdropFilter: "blur(10px)", // for Safari
+    border: "5px solid rgba(69, 6, 6, 0.44)",
+    fontSize: "12px",
+    padding: "30px",
+    color: "black",
+  };
   const navigate = useNavigate();
   const context = useContext(noteContext);
   const [note, setNote] = useState({
@@ -15,9 +33,12 @@ const Notes = (props) => {
     edescription: "",
     etag: "",
   });
-
+  const [Notebox, setNotebox] = useState(false);
+  const [note1, setNote1] = useState({
+    title: "",
+    description: "",
+  });
   const { notes, getNotes, editNote } = context;
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -50,9 +71,10 @@ const Notes = (props) => {
     width: "56%",
     backgroundColor: "#130C30",
     borderRadius: "2%",
-    marginLeft: "5%",
+    marginLeft: "10%",
     boxShadow: "0 1px 5px rgba(0,0,0,0.3)",
     cursor: "default",
+    outline: "5px solid rgba(74, 39, 103, 0.94)",
   };
 
   const titleBadgeStyle = {
@@ -65,10 +87,6 @@ const Notes = (props) => {
     width: "fit-content",
     height: "75%",
     marginLeft: "42%",
-    borderBottom: "15px solid transparent",
-    borderLeft: "20px solid transparent",
-    borderRight: "20px solid transparent",
-    borderTop: "none",
     clipPath: "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)",
   };
 
@@ -86,7 +104,13 @@ const Notes = (props) => {
       etag: currentNote.tag,
     });
   };
-
+  const closeNotebox = () => {
+    setNotebox(false);
+    setNote1({
+      title: "",
+      description: "",
+    });
+  };
   const handleClick = () => {
     refClose.current.click();
     editNote(note.id, note.etitle, note.edescription, note.etag);
@@ -96,7 +120,17 @@ const Notes = (props) => {
   const onChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
-
+  const cardtitle = {
+    backgroundImage: `url(${cardbackground})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    height: "350px",
+    width: "350px",
+    borderRadius: "25px",
+    outline: "5px solid rgba(74, 39, 103, 0.94)",
+    marginLeft: "5%",
+  };
   return (
     <>
       <button
@@ -164,9 +198,7 @@ const Notes = (props) => {
                       border: "1px solid #555",
                     }}
                   />
-                  <small className="form-text text-muted">
-                    Max 20 characters.
-                  </small>
+                  <small style={{ color: "white" }}>Max 20 characters.</small>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">
@@ -180,6 +212,7 @@ const Notes = (props) => {
                     onChange={onChange}
                     value={note.edescription}
                     minLength={5}
+                    maxLength={300}
                     required
                     style={{
                       backgroundColor: "#2c2c3a",
@@ -187,6 +220,7 @@ const Notes = (props) => {
                       border: "1px solid #555",
                     }}
                   />
+                  <small style={{ color: "white" }}>Max 300 characters.</small>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">
@@ -208,9 +242,7 @@ const Notes = (props) => {
                       border: "1px solid #555",
                     }}
                   />
-                  <small className="form-text text-muted">
-                    Max 10 characters.
-                  </small>
+                  <small style={{ color: "white" }}>Max 10 characters.</small>
                 </div>
               </form>
             </div>
@@ -243,12 +275,12 @@ const Notes = (props) => {
 
       {/* Home page layout */}
       <div
-        className="d-flex justify-content-around align-items-center"
+        className="d-flex justify-content-start align-items-center"
         style={backgroundStyle}
       >
-        <div className="border main-box" style={mainBoxStyle}>
+        <div className="main-box" style={mainBoxStyle}>
           <div className="titlesetion d-flex" style={{ height: "20%" }}>
-            <div className="border" style={titleBadgeStyle}>
+            <div className="" style={titleBadgeStyle}>
               Your Notes
               <div>
                 <CgNotes style={iconStyle} />
@@ -261,7 +293,10 @@ const Notes = (props) => {
             style={{ height: "65%", width: "100%" }}
           >
             <div style={{ height: "8%", width: "4%" }}></div>
-            <div className="d-flex flex-wrap" style={{ height: "100%", width: "100%" }}>
+            <div
+              className="d-flex flex-wrap"
+              style={{ height: "100%", width: "100%" }}
+            >
               {notes.length === 0 ? (
                 <div
                   className="notesempty text-center"
@@ -283,15 +318,77 @@ const Notes = (props) => {
                   updateNote={updateNote}
                   note={note}
                   showAlert={props.showAlert}
+                  setNote1={setNote1}
+                  setNotebox={setNotebox}
                 />
               ))}
             </div>
             <div style={{ height: "8%", width: "4%" }}></div>
           </div>
         </div>
-        <div className="border" style={{ height: "350px", width: "250px" }}>
-          Hello
-        </div>
+        {Notebox ? (
+          <div style={cardtitle}>
+            <div
+              className="d-flex justify-content-end"
+              style={{ height: "10%" }}
+            >
+              <div
+                style={{
+                  backgroundColor: "red",
+                  width: "7%",
+                  borderRadius: "5px",
+                  height: "70%",
+                  marginRight: "3%",
+                  marginTop: "5px",
+                }}
+              >
+                <button
+                  type="button"
+                  className="btn-close"
+                  aria-label="Close"
+                  style={{ filter: "invert(1)", color: "black" }}
+                  onClick={closeNotebox}
+                ></button>
+              </div>
+            </div>
+            <div
+              className="NoteBox d-flex justify-content-center align-items-center"
+              style={{ height: "30%" }}
+            >
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{
+                  width: "90%",
+                  backgroundColor: "#994a4a",
+                  borderRadius: "60%",
+                  height: "100%",
+                  color: "white",
+                  fontSize: "10px",
+                  padding: "40px",
+                  border: "5px solid rgba(15, 15, 15, 0.84)",
+                }}
+              >
+                {note1.title}
+              </div>
+            </div>
+            <div
+              className="d-flex justify-content-center align-items-center"
+              style={{ height: "60%" }}
+            >
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={blurDivStyle}
+              >
+                {note1.description}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={{border: "2px solid black",height: "300px",width: "300px",marginLeft: "8%",borderRadius: "20px",backgroundColor: "#111f47"}}>
+            <div className="d-flex justify-content-center align-items-end" style={{height: "20%",color: "green"}}><h3>Note box</h3></div>
+            <div className="d-flex justify-content-center"><IoIosMail size={250} color="yellow"/></div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Backgroundimage from "../images/Background_image.png";
 import blacktexture from "../images/blacktexture.png";
+import signup from "../images/signup_image.png";
 const Signup = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const backgroundStyle = {
@@ -64,22 +65,85 @@ const Signup = (props) => {
     backgroundSize: "auto",
     opacity: "0.9",
     width: "90%", // Responsive width
-    maxWidth: "500px", // Maximum width on larger screens
+    maxWidth: "500px", // Malximum width on larger screens
     height: "auto",
     minHeight: "400px",
     borderRadius: "8%",
     transition: "all 0.3s ease",
     boxShadow: isHovered
-      ? "15px 15px 50px 15px rgba(0, 0, 0, 0.6)"
+      ? "15px 15px 50px 15px rgba(11, 10, 10, 0.6)"
       : "10px 10px 40px 10px black",
     transform: isHovered ? "scale(1.02)" : "scale(1)",
     padding: "20px",
     margin: "20px",
     color: "white",
+    marginTop: "5px",
+  };
+  const noiseBackground1 = {
+    backgroundColor: "#fff",
+    backgroundImage: `url(${signup})`,
+    backgroundRepeat: "repeat",
+    backgroundSize: "cover",
+    opacity: "0.9",
+    width: "70%", // Responsive width // Maximum width on larger screens
+    height: "300",
+    minHeight: "300px",
+    transition: "all 0.3s ease",
+    padding: "20px",
+    margin: "0px",
+    color: "white",
   };
 
   return (
     <div style={backgroundStyle}>
+      <div className="" style={{ width: "30%" }}>
+        <div className="" style={noiseBackground1}></div>
+        <div
+          className="border"
+          style={{ height: "100px", width: "70%", backgroundColor: "black" }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "12px",
+              marginTop: "8%",
+              color: "white",
+            }}
+          >
+            Want to know about app? Click here{" "}
+            <span
+              style={{
+                color: "#3d3dd1",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/about")}
+            >
+              About
+            </span>
+          </div>
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "12px",
+              marginTop: "4%",
+              color: "white",
+            }}
+          >
+            Already have an Account? Then click here{" "}
+            <span
+              style={{
+                color: "#3d3dd1",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/login")}
+            >
+              Sign in
+            </span>
+          </div>
+        </div>
+      </div>
       <div
         className="container border"
         style={noiseBackground}

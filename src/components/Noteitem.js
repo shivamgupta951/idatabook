@@ -20,6 +20,13 @@ const Noteitem = (props) => {
 
   // 🔁 State to handle hover
   const [isHovered, setIsHovered] = useState(false);
+  const viewhandler = (note) => {
+    props.setNote1({
+      title: note.title,
+      description: note.description,
+    });
+    props.setNotebox(true);
+  };
 
   // 💡 Base card style
   const cardContainerStyle = {
@@ -105,6 +112,9 @@ const Noteitem = (props) => {
                   width: "55px",
                   cursor: "pointer",
                   transition: "all 0.3s ease",
+                }}
+                onClick={() => {
+                  viewhandler(note);
                 }}
               >
                 view

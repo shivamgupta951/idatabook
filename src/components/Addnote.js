@@ -104,7 +104,7 @@ const Addnote = (props) => {
                   type="button"
                   className="btn-close"
                   onClick={() => setShowModal(false)}
-                  style={{ filter: "invert(1)" }}
+                  style={{ filter: "invert(1)", marginRight: "15px" }}
                 ></button>
               </div>
               <div className="modal-body">
@@ -129,9 +129,7 @@ const Addnote = (props) => {
                         border: "1px solid #555",
                       }}
                     />
-                    <small className="form-text text-muted">
-                      Max 20 characters.
-                    </small>
+                    <small style={{ color: "white" }}>Max 20 characters.</small>
                   </div>
                   <div className="m-3">
                     <label htmlFor="description" className="form-label">
@@ -145,6 +143,7 @@ const Addnote = (props) => {
                       onChange={onChange}
                       value={note.description}
                       minLength={5}
+                      maxLength={300}
                       required
                       style={{
                         backgroundColor: "#2c2c3a",
@@ -152,6 +151,7 @@ const Addnote = (props) => {
                         border: "1px solid #555",
                       }}
                     />
+                    <small style={{ color: "white" }}>Max 300 characters.</small>
                   </div>
                   <div className="m-3">
                     <label htmlFor="tag" className="form-label">
@@ -173,9 +173,7 @@ const Addnote = (props) => {
                         border: "1px solid #555",
                       }}
                     />
-                    <small className="form-text text-muted">
-                      Max 10 characters.
-                    </small>
+                    <small style={{ color: "white" }}>Max 10 characters.</small>
                   </div>
                 </form>
               </div>
