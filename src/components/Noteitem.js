@@ -35,9 +35,10 @@ const Noteitem = (props) => {
     borderRadius: "5px",
     marginLeft: "11px",
     marginTop: "6px",
-    backgroundColor: "wheat",
+    backgroundColor: "#ac4aac",
     transition: "all 0.4s ease-in-out",
     cursor: "pointer",
+    color: "black",
     transform: isHovered ? "scale(1.05)" : "scale(1)",
     boxShadow: isHovered
       ? "0 8px 16px rgba(0, 0, 0, 0.3)"
@@ -87,7 +88,8 @@ const Noteitem = (props) => {
                   deleteNote(note._id);
                   props.showAlert("Deleted Successfully", "success");
                 }}
-                className="point text-danger"
+                className="point"
+                color="red"
                 size={20}
                 style={{ marginTop: "1px", cursor: "pointer" }}
               />
@@ -95,7 +97,7 @@ const Noteitem = (props) => {
                 onClick={() => {
                   updateNote(note);
                 }}
-                className="point mx-1 text-primary"
+                className="point text-primary"
                 size={20}
                 style={{ cursor: "pointer" }}
               />
@@ -108,7 +110,7 @@ const Noteitem = (props) => {
                   fontSize: "10px",
                   marginTop: "2px",
                   border: "2px solid grey",
-                  backgroundColor: "#a7a094",
+                  backgroundColor: "#a48187",
                   width: "55px",
                   cursor: "pointer",
                   transition: "all 0.3s ease",

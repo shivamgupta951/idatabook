@@ -9,6 +9,7 @@ import { CgNotes } from "react-icons/cg";
 import { IoIosMail } from "react-icons/io";
 /* 
    online database or use versal 
+   Also update the logo!
 */
 const Notes = (props) => {
   const blurDivStyle = {
@@ -76,7 +77,7 @@ const Notes = (props) => {
   };
 
   const titleBadgeStyle = {
-    backgroundColor: "#d3d3d3",
+    backgroundColor: "#8e4d4d",
     color: "black",
     fontWeight: "bold",
     fontFamily: "cursive",
@@ -302,7 +303,7 @@ const Notes = (props) => {
                     color: "wheat",
                     fontSize: "25px",
                     marginTop: "135px",
-                    marginLeft: "210px",
+                    marginLeft: "290px",
                   }}
                 >
                   No notes to display
@@ -382,7 +383,7 @@ const Notes = (props) => {
             </div>
           </div>
         ) : (
-          <div style={{border: "2px solid black",height: "300px",width: "300px",marginLeft: "8%",borderRadius: "20px",backgroundColor: "#111f47"}}>
+          <div style={{border: "2px solid black",height: "300px",width: "300px",marginLeft: "8%",borderRadius: "20px",backgroundColor: "black"}}>
             <div className="d-flex justify-content-center align-items-end" style={{height: "20%",color: "green"}}><h3>Note box</h3></div>
             <div className="d-flex justify-content-center"><IoIosMail size={250} color="yellow"/></div>
           </div>
