@@ -78,6 +78,7 @@ const Signup = (props) => {
     margin: "20px",
     color: "white",
     marginTop: "5px",
+    outline: "7px solid rgba(74, 39, 103, 0.94)",
   };
   const noiseBackground1 = {
     backgroundColor: "#fff",
@@ -92,7 +93,7 @@ const Signup = (props) => {
     padding: "20px",
     margin: "0px",
     color: "white",
-  };
+ };
 
   return (
     <div style={backgroundStyle}>

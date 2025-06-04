@@ -73,6 +73,7 @@ const Login = (props) => {
     transform: isHovered ? "scale(1.02)" : "scale(1)",
     padding: "20px",
     margin: "20px",
+    outline: "7px solid rgba(74, 39, 103, 0.94)",
   };
 
   return (
@@ -91,7 +92,10 @@ const Login = (props) => {
         </h2>
         {!localStorage.getItem("token") && console.log("auth-token is empty!")}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3" style={{ width: "100%", marginTop: "8%",marginLeft: "14%"}}>
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "8%", marginLeft: "14%" }}
+          >
             <label
               htmlFor="email"
               className="form-label"
@@ -107,10 +111,13 @@ const Login = (props) => {
               value={credentials.email}
               onChange={onChange}
               required
-              style={{ width: "70%"}}
+              style={{ width: "70%" }}
             />
           </div>
-          <div className="mb-3" style={{ width: "100%", marginTop: "5%",marginLeft: "14%"}}>
+          <div
+            className="mb-3"
+            style={{ width: "100%", marginTop: "5%", marginLeft: "14%" }}
+          >
             <label
               htmlFor="password"
               className="form-label"

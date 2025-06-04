@@ -8,8 +8,6 @@ import cardbackground from "../images/cardbackground.png";
 import { CgNotes } from "react-icons/cg";
 import { IoIosMail } from "react-icons/io";
 /* 
-   Outline at every box 
-   hover effects 
    online database or use versal 
 */
 const Notes = (props) => {
@@ -358,10 +356,10 @@ const Notes = (props) => {
               <div
                 className="d-flex justify-content-center align-items-center"
                 style={{
-                  width: "90%",
+                  width: "80%",
                   backgroundColor: "#994a4a",
-                  borderRadius: "60%",
-                  height: "100%",
+                  borderRadius: "7%",
+                  height: "80%",
                   color: "white",
                   fontSize: "10px",
                   padding: "40px",

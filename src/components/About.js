@@ -33,6 +33,7 @@ const About = () => {
       : "10px 10px 40px 10px black",
     transform: isHovered ? "scale(1.05)" : "scale(1)",
     color: "white",
+    outline: "7px solid rgba(74, 39, 103, 0.94)",
   };
   const featureTechnologies = {
     marginTop: "6%",
@@ -46,10 +47,11 @@ const About = () => {
       ? "15px 15px 50px 15px rgba(0, 0, 0, 0.6)"
       : "10px 10px 40px 10px black",
     transform: isHovered1 ? "scale(1.05)" : "scale(1)",
+    outline: "7px solid rgba(74, 39, 103, 0.94)",
   };
   const ownercard = {
-    height: "60%",
-    width: "50%",
+    height: "70%",
+    width: "60%",
     borderRadius: "10%",
     backgroundColor: "black",
     transition: "all 0.3s ease",
@@ -57,6 +59,8 @@ const About = () => {
       ? "15px 15px 50px 15px rgba(0, 0, 0, 0.6)"
       : "10px 10px 40px 10px black",
     transform: isHovered2 ? "scale(1.05)" : "scale(1)",
+    outline: "7px solid rgba(74, 39, 103, 0.94)",
+    paddingBottom: "5px"
   };
   return (
     <div style={backgroundStyle}>
