@@ -119,7 +119,11 @@ router.post("/getuser", fetchuser, async (req, res) => {
 });
 // Route 0: Simple health check
 router.get("/test", (req, res) => {
-  res.json({ status: "ok", message: "Auth route is working!" });
+  return res.status(200).json({
+    status: "ok",
+    message: "Auth route is working!",
+  });
 });
+
 
 module.exports = router;
