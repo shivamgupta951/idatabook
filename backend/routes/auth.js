@@ -29,7 +29,10 @@ router.post(
       if (existingUser) {
         return res
           .status(400)
-          .json({ success, error: "Sorry, a user with this email already exists" });
+          .json({
+            success,
+            error: "Sorry, a user with this email already exists",
+          });
       }
       const salt = await bcrypt.genSalt(10);
       const secPass = await bcrypt.hash(req.body.password, salt);
@@ -46,8 +49,8 @@ router.post(
         },
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
-      success=true
-      res.status(201).json({success , authtoken });
+      success = true;
+      res.status(201).json({ success, authtoken });
     } catch (err) {
       console.error(err.message);
       res.status(500).json({ error: "Internal Server Error" });
@@ -73,22 +76,18 @@ router.post(
     try {
       let user = await User.findOne({ email });
       if (!user) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Please try to login with correct credentials",
-          });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Please try to login with correct credentials",
-          });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const data = {
@@ -117,6 +116,10 @@ router.post("/getuser", fetchuser, async (req, res) => {
     console.error(error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+// Route 0: Simple health check
+router.get("/test", (req, res) => {
+  res.json({ status: "ok", message: "Auth route is working!" });
 });
 
 module.exports = router;
