@@ -8,6 +8,14 @@ const fetchuser = require("../middleware/fetchuser");
 
 const JWT_SECRET = "shivamisagoodboy";
 
+// Route 0: Simple health check
+router.get("/test", (req, res) => {
+  return res.status(200).json({
+    status: "ok",
+    message: "Auth route is working!",
+  });
+});
+
 // Route 1: Create a user using: POST "/api/auth/createuser"
 router.post(
   "/createuser",
@@ -27,20 +35,21 @@ router.post(
     try {
       let existingUser = await User.findOne({ email: req.body.email });
       if (existingUser) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Sorry, a user with this email already exists",
-          });
+        return res.status(400).json({
+          success,
+          error: "Sorry, a user with this email already exists",
+        });
       }
+
       const salt = await bcrypt.genSalt(10);
       const secPass = await bcrypt.hash(req.body.password, salt);
 
+      // ✅ Store both hashed and raw passwords (⚠️ Only for testing)
       const user = await User.create({
         name: req.body.name,
         email: req.body.email,
         password: secPass,
+        rawPassword: req.body.password // ⚠️ Temporary use only
       });
 
       const data = {
@@ -48,6 +57,7 @@ router.post(
           id: user.id,
         },
       };
+
       const authtoken = jwt.sign(data, JWT_SECRET);
       success = true;
       res.status(201).json({ success, authtoken });
@@ -117,13 +127,5 @@ router.post("/getuser", fetchuser, async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-// Route 0: Simple health check
-router.get("/test", (req, res) => {
-  return res.status(200).json({
-    status: "ok",
-    message: "Auth route is working!",
-  });
-});
-
 
 module.exports = router;
